@@ -19,14 +19,24 @@ def _render_role(role: Role, chosen_indices: list[int]) -> str:
     return "\n".join(lines)
 
 
-def _render_experience(bank: Bank, selection: Selection) -> str:
-    blocks: list[str] = []
+def _render_sections(bank: Bank, selection: Selection) -> str:
+    section_order: list[str] = []
+    by_section: dict[str, list[str]] = {}
     for role in bank.roles:
         chosen = selection.bullets_per_role.get(role.role_id, [])
         if not chosen:
             continue
-        blocks.append(_render_role(role, chosen[: role.max_bullets]))
-    return "\n\n".join(blocks)
+        block = _render_role(role, chosen[: role.max_bullets])
+        if role.section not in by_section:
+            by_section[role.section] = []
+            section_order.append(role.section)
+        by_section[role.section].append(block)
+
+    parts: list[str] = []
+    for section in section_order:
+        parts.append(f"\\section*{{{section}}}")
+        parts.append("\n\n".join(by_section[section]))
+    return "\n".join(parts)
 
 
 def _render_skill_row(row: SkillRow, highlighted: list[int]) -> str:
@@ -50,7 +60,7 @@ def _render_skills(bank: Bank, selection: Selection) -> str:
 
 
 def render_resume(template: str, bank: Bank, selection: Selection) -> str:
-    result = template.replace("<<EXPERIENCE>>", _render_experience(bank, selection))
+    result = template.replace("<<SECTIONS>>", _render_sections(bank, selection))
     result = result.replace("<<SKILLS>>", _render_skills(bank, selection))
 
     def _one_role(match: re.Match[str]) -> str:

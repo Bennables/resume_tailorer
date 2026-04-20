@@ -12,6 +12,7 @@ class Role:
     dates: str
     location: str
     size: str
+    section: str
     bullets: list[str] = field(default_factory=list)
 
     @property
@@ -51,12 +52,16 @@ def parse_bullets(path: Path) -> Bank:
     bullets: list[str] = []
     in_skills = False
     current_row: SkillRow | None = None
+    current_section = "Experience"
 
     while i < len(lines):
         line = lines[i].rstrip()
         stripped = line.lstrip()
 
-        if stripped.startswith("%%% SKILLS_START"):
+        section_value = _strip_marker(stripped, "SECTION")
+        if section_value is not None and not in_skills:
+            current_section = section_value or current_section
+        elif stripped.startswith("%%% SKILLS_START"):
             in_skills = True
             current_row = None
         elif stripped.startswith("%%% SKILLS_END"):
@@ -80,6 +85,7 @@ def parse_bullets(path: Path) -> Bank:
                     dates=current.get("DATES", ""),
                     location=current.get("LOCATION", ""),
                     size=current.get("SIZE", "small").lower(),
+                    section=current_section,
                     bullets=bullets,
                 ))
             current = None

@@ -1,4 +1,8 @@
 % Master bullet bank. Use these markers so the parser can group bullets by role.
+%
+% Section marker (roles that follow belong to this section until the next marker):
+%   %%% SECTION: <section heading, e.g. Experience, Projects, Leadership>
+%
 % Role block format:
 %   %%% ROLE_ID: <unique_id>
 %   %%% COMPANY: <company name>
@@ -17,6 +21,8 @@
 %   %%% ROW: <row name>
 %   skill1, skill2
 %   %%% SKILLS_END
+
+%%% SECTION: Experience
 
 %%% ROLE_ID: example_company_swe_intern
 %%% COMPANY: Example Company
@@ -43,9 +49,27 @@
 \item TODO: bullet 4
 %%% END_ROLE
 
+
+
+
+
+
+
+
+
+
+
+
+
 %%% SKILLS_START
 %%% ROW: Languages
-TODO, TODO, TODO
-%%% ROW: Frameworks \& Tools
-TODO, TODO, TODO
+TypeScript, JavaScript, Python, Java, SQL, C/C++, HTML/CSS
+%%% ROW: Frameworks \& Libraries
+Node.js, Express, React, Next.js, FastAPI, Flask, Prisma, Tomcat
+%%% ROW: Databases \& Caching
+MySQL, PostgreSQL, Redis
+%%% ROW: Cloud \& DevOps
+AWS (ECS, EKS, EC2, Lambda, S3), GCP, Docker, Kubernetes, CI/CD, GitHub Actions, Git
+%%% ROW: Testing \& Tools
+Jest, Supertest, OAuth 2.0, JWT, OpenAI API, XGBoost, pandas, NumPy
 %%% SKILLS_END
