@@ -1,0 +1,51 @@
+% Master bullet bank. Use these markers so the parser can group bullets by role.
+% Role block format:
+%   %%% ROLE_ID: <unique_id>
+%   %%% COMPANY: <company name>
+%   %%% TITLE: <job title>
+%   %%% DATES: <e.g. Jun 2023 -- Aug 2023>
+%   %%% LOCATION: <e.g. San Francisco, CA>
+%   %%% SIZE: big | small     (big = up to 4 bullets, small = up to 3)
+%   \item <bullet 1>
+%   \item <bullet 2>
+%   %%% END_ROLE
+%
+% Skills block format (one block total):
+%   %%% SKILLS_START
+%   %%% ROW: <row name, e.g. Languages>
+%   skill1, skill2, skill3
+%   %%% ROW: <row name>
+%   skill1, skill2
+%   %%% SKILLS_END
+
+%%% ROLE_ID: example_company_swe_intern
+%%% COMPANY: Example Company
+%%% TITLE: Software Engineering Intern
+%%% DATES: Jun 2025 -- Aug 2025
+%%% LOCATION: San Francisco, CA
+%%% SIZE: big
+\item TODO: bullet describing impact with metrics.
+\item TODO: bullet mentioning technologies used.
+\item TODO: add as many bullets per role as you want; the tailorer picks a subset.
+\item TODO: another bullet.
+\item TODO: one more bullet.
+%%% END_ROLE
+
+%%% ROLE_ID: another_role_id
+%%% COMPANY: TODO Company Name
+%%% TITLE: TODO Title
+%%% DATES: TODO Dates
+%%% LOCATION: TODO Location
+%%% SIZE: small
+\item TODO: bullet 1
+\item TODO: bullet 2
+\item TODO: bullet 3
+\item TODO: bullet 4
+%%% END_ROLE
+
+%%% SKILLS_START
+%%% ROW: Languages
+TODO, TODO, TODO
+%%% ROW: Frameworks \& Tools
+TODO, TODO, TODO
+%%% SKILLS_END
