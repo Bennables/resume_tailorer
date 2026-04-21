@@ -1,10 +1,12 @@
-"""Calls the Claude API to pick relevant bullets per role and skills per row."""
+"""Calls the Gemini API to pick relevant bullets per role and skills per row."""
 
 import json
+import os
 import re
 from dataclasses import dataclass
 
-from anthropic import Anthropic
+from google import genai
+from google.genai import types
 
 from .parse_bullets import Bank
 
@@ -46,6 +48,8 @@ _INSTRUCTIONS = (
     '"skills_per_row": {"<row_name>": [<skill_idx>, ...]}}'
 )
 
+_MODEL = "gemini-2.5-flash"
+
 
 def _build_bank_payload(bank: Bank) -> str:
     payload = {
@@ -80,20 +84,15 @@ def _parse_response(text: str) -> Selection:
 
 
 def select_bullets(bank: Bank, job_description: str) -> Selection:
-    client = Anthropic()
-    message = client.messages.create(
-        model="claude-sonnet-4-6",
-        max_tokens=2048,
-        system=[
-            {"type": "text", "text": _INSTRUCTIONS},
-            {
-                "type": "text",
-                "text": _build_bank_payload(bank),
-                "cache_control": {"type": "ephemeral"},
-            },
-        ],
-        messages=[
-            {"role": "user", "content": f"JOB DESCRIPTION:\n{job_description}"}
-        ],
+    client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
+    system_instruction = f"{_INSTRUCTIONS}\n\n{_build_bank_payload(bank)}"
+    response = client.models.generate_content(
+        model=_MODEL,
+        contents=f"JOB DESCRIPTION:\n{job_description}",
+        config=types.GenerateContentConfig(
+            system_instruction=system_instruction,
+            response_mime_type="application/json",
+            temperature=0.0,
+        ),
     )
-    return _parse_response(message.content[0].text)
+    return _parse_response(response.text)

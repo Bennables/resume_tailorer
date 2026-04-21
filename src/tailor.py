@@ -1,4 +1,4 @@
-"""Entry point: reads inputs, calls Claude, writes output/resume.tex."""
+"""Entry point: reads inputs, calls Gemini, writes output/resume.tex."""
 
 from pathlib import Path
 

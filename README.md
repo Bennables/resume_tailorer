@@ -5,7 +5,7 @@ Generates a job-specific LaTeX resume by selecting the most relevant bullets fro
 ## Setup
 
 1. `pip install -r requirements.txt`
-2. `cp .env.example .env` and add your `ANTHROPIC_API_KEY`
+2. `cp .env.example .env` and add your `GEMINI_API_KEY` (from [Google AI Studio](https://aistudio.google.com/apikey))
 3. Fill in the one-time inputs:
    - [inputs/bullets.tex](inputs/bullets.tex) — your master bank of all experiences and bullets
    - [inputs/template.tex](inputs/template.tex) — your resume layout with `<<PLACEHOLDER>>` markers
@@ -19,6 +19,6 @@ Generates a job-specific LaTeX resume by selecting the most relevant bullets fro
 ## How it works
 
 - Parses the bullet bank into structured roles
-- Sends the full bank + job description to Claude (bullets cached across runs)
-- Claude returns a selection of bullets per role, tuned to the JD
+- Sends the full bank + job description to Gemini
+- Gemini returns a selection of bullets per role, tuned to the JD
 - Renders the selection into your template and writes `output/resume.tex`

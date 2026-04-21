@@ -1,33 +1,82 @@
-% Resume template. Replace this whole file with your own LaTeX resume layout.
-% Leave the <<PLACEHOLDER>> markers where you want tailored content injected.
+% Resume template. The tailorer injects content at the <<SECTIONS>> and <<SKILLS>> markers.
 %
-% Available placeholders:
+% Placeholders:
 %   <<SECTIONS>>      — every section heading (from %%% SECTION: in bullets.tex)
 %                       followed by that section's selected roles, in bullets.tex order
 %   <<ROLE:role_id>>  — one specific role by its ROLE_ID (no section heading)
 %   <<SKILLS>>        — all skill rows, with JD-relevant skills bolded and moved to the front
-%
-% Anything outside a placeholder is passed through unchanged.
 
 \documentclass[letterpaper,11pt]{article}
-\usepackage[margin=0.75in]{geometry}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
 \usepackage{enumitem}
-\setlist[itemize]{leftmargin=*, nosep}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\input{glyphtounicode}
+\usepackage[normalem]{ulem}
+\renewcommand\ULdepth{1.8pt}
+\renewcommand\ULthickness{0.4pt}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1in}
+\addtolength{\topmargin}{-.5in}
+\addtolength{\textheight}{1.0in}
+
+\urlstyle{same}
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+\titleformat{\section}{
+  \vspace{-5pt}\scshape\raggedright\Large
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+% Match the starred \section* form the tailorer emits
+\titleformat{name=\section,numberless}{
+  \vspace{-5pt}\scshape\raggedright\Large
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+\pdfgentounicode=1
+
+\setlist[itemize]{leftmargin=0.25in, topsep=2pt, itemsep=0pt, parsep=0pt}
 
 \begin{document}
+\renewcommand{\ULdepth}{4pt}
 
+%----------HEADING----------
 \begin{center}
-  {\Large \textbf{TODO: Your Name}} \\
-  TODO: email $\cdot$ TODO: phone $\cdot$ TODO: linkedin $\cdot$ TODO: github
+    \textbf{\Huge \scshape Ben Sirivallop} \\ \vspace{1pt}
+    \small 415-806-2836 $|$ \href{mailto:bsirival@uci.edu}{\uline{bsirival@uci.edu}} $|$
+\href{https://linkedin.com/in/bensiriv}{\uline{linkedin.com/in/bensiriv}} $|$
+\href{https://github.com/bennables}{\uline{github.com/bennables}}
 \end{center}
 
+%-----------EDUCATION-----------
 \section*{Education}
-\textbf{TODO: University} \hfill TODO: Graduation Date \\
-TODO: Degree, TODO: GPA
+\textbf{University of California, Irvine} \hfill Sep. 2023 -- Present \\
+\textit{Bachelor of Science in Computer Science (Expected June 2027), Minor in Economics} \hfill Irvine, CA
 
+%-----------EXPERIENCE + PROJECTS (injected)-----------
 <<SECTIONS>>
 
-\section*{Skills}
+%-----------TECHNICAL SKILLS-----------
+\section*{Technical Skills}
+\begingroup
+\small
 <<SKILLS>>
+\endgroup
 
 \end{document}

@@ -5,10 +5,10 @@
 %
 % Role block format:
 %   %%% ROLE_ID: <unique_id>
-%   %%% COMPANY: <company name>
-%   %%% TITLE: <job title>
+%   %%% COMPANY: <company name, or project name for Projects section>
+%   %%% TITLE: <job title, or tech stack for Projects section>
 %   %%% DATES: <e.g. Jun 2023 -- Aug 2023>
-%   %%% LOCATION: <e.g. San Francisco, CA>
+%   %%% LOCATION: <e.g. San Francisco, CA; leave blank for projects>
 %   %%% SIZE: big | small     (big = up to 4 bullets, small = up to 3)
 %   \item <bullet 1>
 %   \item <bullet 2>
@@ -18,48 +18,79 @@
 %   %%% SKILLS_START
 %   %%% ROW: <row name, e.g. Languages>
 %   skill1, skill2, skill3
-%   %%% ROW: <row name>
-%   skill1, skill2
 %   %%% SKILLS_END
 
 %%% SECTION: Experience
 
-%%% ROLE_ID: example_company_swe_intern
-%%% COMPANY: Example Company
-%%% TITLE: Software Engineering Intern
-%%% DATES: Jun 2025 -- Aug 2025
-%%% LOCATION: San Francisco, CA
+%%% ROLE_ID: progroup_swe_intern
+%%% COMPANY: ProGroup
+%%% TITLE: Software Engineer Intern
+%%% DATES: Dec. 2025 -- Present
+%%% LOCATION: Irvine, CA
 %%% SIZE: big
-\item TODO: bullet describing impact with metrics.
-\item TODO: bullet mentioning technologies used.
-\item TODO: add as many bullets per role as you want; the tailorer picks a subset.
-\item TODO: another bullet.
-\item TODO: one more bullet.
+\item Reduced costs \textbf{80\%} by migrating a PowerApps tool to \textbf{TypeScript, Node.js, MySQL, Redis, and AWS}.
+\item Integrated \textbf{Redis caching} on key endpoints, cutting average request times by \textbf{25\%} and reducing backend load.
+\item Achieved \textbf{83\% unit test coverage} using \textbf{Jest and Supertest} to ensure high API reliability and stability.
+\item Deployed to \textbf{AWS ECS} via \textbf{CI/CD pipelines} and implemented notifications with \textbf{AWS SQS and Lambda}.
 %%% END_ROLE
 
-%%% ROLE_ID: another_role_id
-%%% COMPANY: TODO Company Name
-%%% TITLE: TODO Title
-%%% DATES: TODO Dates
-%%% LOCATION: TODO Location
+%%% ROLE_ID: uci_python_ta
+%%% COMPANY: University of California, Irvine
+%%% TITLE: Python Teaching Assistant
+%%% DATES: Jan. 2026 -- Present
+%%% LOCATION: Irvine, CA
 %%% SIZE: small
-\item TODO: bullet 1
-\item TODO: bullet 2
-\item TODO: bullet 3
-\item TODO: bullet 4
+\item Instructed \textbf{45 students} on Python concepts including \textbf{testing, generators, multithreading, and scripting}.
+\item Resolved logic errors in \textbf{OOP projects} and \textbf{multi-file architectures} through systematic debugging sessions.
 %%% END_ROLE
 
+%%% ROLE_ID: thai_oil_data_science_intern
+%%% COMPANY: Thai Oil
+%%% TITLE: Data Science Intern
+%%% DATES: Jun. 2024 -- Sep. 2024
+%%% LOCATION: Bangkok, Thailand
+%%% SIZE: small
+\item Built a data pipeline processing \textbf{40GB+} of IoT sensor data from \textbf{AWS S3} to \textbf{SageMaker} for ML training.
+\item Developed robust \textbf{XGBoost classification models} achieving \textbf{89\% accuracy} in identifying pipe inefficiencies.
+\item Automated diagnostic workflows in \textbf{Python}, reducing inspection time by \textbf{60\%} and increasing productivity.
+%%% END_ROLE
 
+%%% SECTION: Projects
 
+%%% ROLE_ID: squadwork
+%%% COMPANY: Squadwork
+%%% TITLE: TypeScript, Node.js, Redis, WebSockets, JWT, Docker, AWS ECS
+%%% DATES: Jun. 2025 -- Present
+%%% LOCATION:
+%%% SIZE: big
+\item Integrated a \textbf{Redis caching layer}, reducing \textbf{API response times} by \textbf{85\%} and decreasing \textbf{database load}.
+\item Automated \textbf{CI/CD pipelines} on \textbf{AWS ECS}, cutting \textbf{deployment time} by \textbf{80\%} (\textbf{15 minutes} to \textbf{3 minutes}).
+\item Built \textbf{real-time team chat} using \textbf{WebSockets} with \textbf{Redis-backed message persistence} and delivery.
+\item Architected \textbf{RESTful APIs} with \textbf{JWT-based authentication}, implementing rotating \textbf{refresh} and \textbf{access token} cycles for secure, \textbf{stateless session management}.
+%%% END_ROLE
 
+%%% ROLE_ID: fabflix
+%%% COMPANY: Fabflix
+%%% TITLE: Java, MySQL, Tomcat, Kubernetes, Docker, AWS, Distributed Systems
+%%% DATES: Jan. 2026 -- Mar. 2026
+%%% LOCATION:
+%%% SIZE: big
+\item Implemented MySQL \textbf{master-slave replication} and \textbf{load balancing} across a cluster of \textbf{Tomcat} instances.
+\item Deployed \textbf{microservices} in \textbf{Docker} containers on a \textbf{Kubernetes cluster} (\textbf{AWS EKS}) running on \textbf{AWS EC2}.
+\item Built an \textbf{autocomplete search} feature with \textbf{cached} query responses using MySQL \textbf{User Defined Functions}.
+\item Designed a relational \textbf{MySQL database schema} modeling complex relationships between movies, stars, genres, and user data, with all interactions secured via PreparedStatements to prevent SQL injection.
+%%% END_ROLE
 
-
-
-
-
-
-
-
+%%% ROLE_ID: ai_native_doc_editor
+%%% COMPANY: AI Native Document Editor
+%%% TITLE: TypeScript, Node.js, OpenAI API, WebSockets, PostgreSQL
+%%% DATES: Oct. 2025 -- Dec. 2025
+%%% LOCATION:
+%%% SIZE: small
+\item Built a text-editor with \textbf{live collaboration} using WebSockets, enabling users to edit documents simultaneously.
+\item Integrated \textbf{AI-powered autocompletion} by streaming user input to \textbf{OpenAI API} with debounced requests to optimize API usage and reduce latency.
+\item Designed a \textbf{user access and permissions system} to manage read/write permissions for multiple users.
+%%% END_ROLE
 
 %%% SKILLS_START
 %%% ROW: Languages
