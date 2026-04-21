@@ -1,0 +1,120 @@
+% Resume template. The tailorer injects content at the SECTIONS and SKILLS placeholders
+% (the double-angle-bracket markers below). See README.md for the full placeholder reference.
+
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\input{glyphtounicode}
+\usepackage[normalem]{ulem}
+\renewcommand\ULdepth{1.8pt}
+\renewcommand\ULthickness{0.4pt}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1in}
+\addtolength{\topmargin}{-.5in}
+\addtolength{\textheight}{1.0in}
+
+\urlstyle{same}
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+\titleformat{\section}{
+  \vspace{-5pt}\scshape\raggedright\Large
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+% Match the starred \section* form the tailorer emits
+\titleformat{name=\section,numberless}{
+  \vspace{-5pt}\scshape\raggedright\Large
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+\pdfgentounicode=1
+
+\setlist[itemize]{leftmargin=0.25in, topsep=2pt, itemsep=0pt, parsep=0pt}
+
+\begin{document}
+\renewcommand{\ULdepth}{4pt}
+
+%----------HEADING----------
+\begin{center}
+    \textbf{\Huge \scshape Ben Sirivallop} \\ \vspace{1pt}
+    \small 415-806-2836 $|$ \href{mailto:bsirival@uci.edu}{\uline{bsirival@uci.edu}} $|$
+\href{https://linkedin.com/in/bensiriv}{\uline{linkedin.com/in/bensiriv}} $|$
+\href{https://github.com/bennables}{\uline{github.com/bennables}}
+\end{center}
+
+%-----------EDUCATION-----------
+\section*{Education}
+\textbf{University of California, Irvine} \hfill Sep. 2023 -- Present \\
+\textit{Bachelor of Science in Computer Science (Expected June 2027), Minor in Economics} \hfill Irvine, CA
+
+%-----------EXPERIENCE + PROJECTS (injected)-----------
+\section*{Experience}
+\textbf{ProGroup} \hfill Dec. 2025 -- Present \\
+\textit{Software Engineer Intern} \hfill Irvine, CA
+\begin{itemize}
+  \item Reduced costs \textbf{80\%} by migrating a PowerApps tool to \textbf{TypeScript, Node.js, MySQL, Redis, and AWS}.
+  \item Integrated \textbf{Redis caching} on key endpoints, cutting average request times by \textbf{25\%} and reducing backend load.
+  \item Deployed to \textbf{AWS ECS} via \textbf{CI/CD pipelines} and implemented notifications with \textbf{AWS SQS and Lambda}.
+  \item Achieved \textbf{83\% unit test coverage} using \textbf{Jest and Supertest} to ensure high API reliability and stability.
+\end{itemize}
+
+\textbf{Thai Oil} \hfill Jun. 2024 -- Sep. 2024 \\
+\textit{Data Science Intern} \hfill Bangkok, Thailand
+\begin{itemize}
+  \item Automated diagnostic workflows in \textbf{Python}, reducing inspection time by \textbf{60\%} and increasing productivity.
+  \item Built a data pipeline processing \textbf{40GB+} of IoT sensor data from \textbf{AWS S3} to \textbf{SageMaker} for ML training.
+\end{itemize}
+\section*{Projects}
+\textbf{Squadwork} \hfill Jun. 2025 -- Present \\
+\textit{TypeScript, Node.js, Redis, WebSockets, JWT, Docker, AWS ECS} \hfill 
+\begin{itemize}
+  \item Integrated a \textbf{Redis caching layer}, reducing \textbf{API response times} by \textbf{85\%} and decreasing \textbf{database load}.
+  \item Automated \textbf{CI/CD pipelines} on \textbf{AWS ECS}, cutting \textbf{deployment time} by \textbf{80\%} (\textbf{15 minutes} to \textbf{3 minutes}).
+  \item Architected \textbf{RESTful APIs} with \textbf{JWT-based authentication}, implementing rotating \textbf{refresh} and \textbf{access token} cycles for secure, \textbf{stateless session management}.
+  \item Built \textbf{real-time team chat} using \textbf{WebSockets} with \textbf{Redis-backed message persistence} and delivery.
+\end{itemize}
+
+\textbf{Fabflix} \hfill Jan. 2026 -- Mar. 2026 \\
+\textit{Java, MySQL, Tomcat, Kubernetes, Docker, AWS, Distributed Systems} \hfill 
+\begin{itemize}
+  \item Deployed \textbf{microservices} in \textbf{Docker} containers on a \textbf{Kubernetes cluster} (\textbf{AWS EKS}) running on \textbf{AWS EC2}.
+  \item Implemented MySQL \textbf{master-slave replication} and \textbf{load balancing} across a cluster of \textbf{Tomcat} instances.
+  \item Designed a relational \textbf{MySQL database schema} modeling complex relationships between movies, stars, genres, and user data, with all interactions secured via PreparedStatements to prevent SQL injection.
+\end{itemize}
+
+\textbf{AI Native Document Editor} \hfill Oct. 2025 -- Dec. 2025 \\
+\textit{TypeScript, Node.js, OpenAI API, WebSockets, PostgreSQL} \hfill 
+\begin{itemize}
+  \item Designed a \textbf{user access and permissions system} to manage read/write permissions for multiple users.
+  \item Built a text-editor with \textbf{live collaboration} using WebSockets, enabling users to edit documents simultaneously.
+\end{itemize}
+
+%-----------TECHNICAL SKILLS-----------
+\section*{Technical Skills}
+\begingroup
+\small
+\textbf{Languages}: \textbf{TypeScript}, \textbf{SQL}, \textbf{JavaScript}, \textbf{HTML/CSS}, \textbf{Python}, Java, C++ \\
+\textbf{Frameworks \& Libraries}: \textbf{React}, \textbf{Node.js}, \textbf{Express}, \textbf{Next.js}, FastAPI, Flask, Prisma, Tomcat \\
+\textbf{Databases \& Caching}: \textbf{Redis}, \textbf{PostgreSQL}, \textbf{MySQL} \\
+\textbf{Cloud \& DevOps}: \textbf{AWS (ECS}, \textbf{EC2}, \textbf{CI/CD}, \textbf{Docker}, \textbf{Kubernetes}, \textbf{EKS}, \textbf{Lambda}, \textbf{S3)}, \textbf{Git}, GCP, GitHub Actions \\
+\textbf{Testing \& Tools}: \textbf{JWT}, \textbf{Jest}, \textbf{Supertest}, OAuth 2.0 \\
+\endgroup
+
+\end{document}

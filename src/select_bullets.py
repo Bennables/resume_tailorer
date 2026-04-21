@@ -40,7 +40,7 @@ _INSTRUCTIONS = (
     "- For each role, pick up to max_bullets bullets. Order indices in the order "
     "they should appear on the resume, strongest fit first.\n"
     "- For each skill row, return indices of skills the JD actually names or "
-    "clearly implies, ordered by relevance. These get bolded and moved to the "
+    "clearly implies, ordered by relevance. These get moved to the "
     "front of the row. Do not mark skills just because they are generally "
     "impressive.\n\n"
     "Output ONLY JSON with this exact shape and nothing else:\n"

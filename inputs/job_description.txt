@@ -1,1 +1,37 @@
-TODO: paste the target job description here before each run.
+About the job
+Full-Stack Software Engineer (New Grad) 
+
+San Francisco, CA (On-Site) 
+
+
+
+Company Overview 
+
+We’re the modern data infrastructure platform for construction, the world’s third-largest industry, and one of its most technologically underserved. 
+
+
+
+Every day, contractors run into the same problem: their business-critical systems don’t talk to each other. These systems, for accounting, project management, estimating, payroll, and field operations, each hold essential data — from job costs and invoices to budgets and schedules, and are the backbone of how contractors run their business, make decisions, and keep projects moving.
+
+
+
+When these systems and data live in silos, the result is errors, delays, double-entry, and wasted money. Teams spend countless hours reconciling spreadsheets, chasing down missing information, and stitching together a reliable view of their projects and finances.
+
+
+
+Our client solves this by being the connective tissue across the industry’s most important tools. We integrate and synchronize data across systems so that contractors always have accurate, up-to-date information in real time. That shared data layer unlocks the next step: workflow automations that replace spreadsheets, emails, and one-off processes with reliable, system-driven execution across finance and operations — enabling teams to work faster, make better decisions, and avoid costly mistakes.
+
+
+
+Requirements
+
+Exceptional college grads with strong intern/co-op experience, ideally from a top undergraduate university
+Bachelor’s Degree in Computer Science
+Self-motivated, high ownership, low ego; desire to work on a fast-paced, intense, fun team. Passion for building a world-class engineering culture.
+Pumped to work in-person with us in SF 5 days/week.
+No need to have: prior experience with our tech stack or at B2B SaaS/API company
+
+
+Tech stack
+
+TypeScript, React, Redis, Postgres, AWS - CDK, EC2
