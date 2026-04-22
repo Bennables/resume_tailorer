@@ -24,13 +24,50 @@ FORM_HTML = """
 </head>
 <body>
   <h1>Resume Tailorer</h1>
-  <form method="post" action="/tailor">
+  <form id="tailor-form" method="post" action="/tailor">
     <label>Folder name</label>
     <input type="text" name="folder" required placeholder="acme_backend" />
     <label>Job description</label>
     <textarea name="job_description" required placeholder="Paste the JD here..."></textarea>
-    <button type="submit">Tailor & Download</button>
+    <button type="submit" id="submit-btn">Tailor & Download</button>
+    <span id="status" style="margin-left: 1rem; color: #555;"></span>
   </form>
+  <script>
+    const form = document.getElementById('tailor-form');
+    const btn = document.getElementById('submit-btn');
+    const status = document.getElementById('status');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      btn.disabled = true;
+      status.textContent = 'Tailoring...';
+      try {
+        const res = await fetch('/tailor', { method: 'POST', body: new FormData(form) });
+        if (!res.ok) throw new Error(await res.text() || res.statusText);
+
+        const disposition = res.headers.get('Content-Disposition') || '';
+        const match = disposition.match(/filename\\*?=(?:UTF-8'')?"?([^";]+)"?/i);
+        const filename = match ? decodeURIComponent(match[1]) : 'resume.pdf';
+
+        const blob = await res.blob();
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        URL.revokeObjectURL(url);
+
+        form.reset();
+        status.textContent = 'Done.';
+      } catch (err) {
+        status.textContent = 'Error: ' + err.message;
+      } finally {
+        btn.disabled = false;
+      }
+    });
+  </script>
 </body>
 </html>
 """

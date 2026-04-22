@@ -8,8 +8,8 @@ from .select_bullets import Selection
 
 def _render_role(role: Role, chosen_indices: list[int]) -> str:
     lines = [
-        f"\\textbf{{{role.company}}} \\hfill {role.dates} \\\\",
-        f"\\textit{{{role.title}}} \\hfill {role.location}",
+        f"\\textbf{{{role.title}}} \\hfill {role.dates} \\\\",
+        f"\\textit{{{role.company}}} \\hfill {role.location}",
         "\\begin{itemize}",
     ]
     for idx in chosen_indices:

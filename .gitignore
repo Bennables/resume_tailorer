@@ -4,3 +4,4 @@ __pycache__/
 output/*.tex
 !output/.gitkeep
 venv/
+output/*
