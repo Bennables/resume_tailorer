@@ -9,19 +9,20 @@ from .select_bullets import Selection
 def _render_role(role: Role, chosen_indices: list[int]) -> str:
     if role.section == "Projects":
         header = f"\\textbf{{{role.company}}} $|$ \\textit{{{role.title}}} \\hfill {role.dates}"
-        lines = [header, "\\begin{itemize}"]
+        lines = [header]
     else:
         lines = [
             f"\\textbf{{{role.title}}} \\hfill {role.dates} \\\\",
             f"\\textit{{{role.company}}} \\hfill {role.location}",
-            "\\begin{itemize}",
         ]
-    for idx in chosen_indices:
-        if 0 <= idx < len(role.bullets):
+    valid = [idx for idx in chosen_indices if 0 <= idx < len(role.bullets)]
+    if valid:
+        lines.append("\\begin{itemize}")
+        for idx in valid:
             lines.append(
-                f"  \\item\\small{{\n    {{{role.bullets[idx]} \\vspace{{-2pt}}}}\n  }}"
+                f"  \\item\\small{{\n    {{{role.bullets[idx]}}}\n  }}"
             )
-    lines.append("\\end{itemize}")
+        lines.append("\\end{itemize}")
     return "\n".join(lines)
 
 
@@ -30,7 +31,7 @@ def _render_sections(bank: Bank, selection: Selection) -> str:
     by_section: dict[str, list[str]] = {}
     for role in bank.roles:
         chosen = selection.bullets_per_role.get(role.role_id, [])
-        if not chosen:
+        if not chosen and role.section != "Experience":
             continue
         block = _render_role(role, chosen)
         if role.section not in by_section:
