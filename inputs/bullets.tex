@@ -10,8 +10,8 @@
 %   %%% DATES: <e.g. Jun 2023 -- Aug 2023>
 %   %%% LOCATION: <e.g. San Francisco, CA; leave blank for projects>
 %   %%% SIZE: big | small     (big = up to 4 bullets, small = up to 3)
-%   \item <bullet 1>
-%   \item <bullet 2>
+%   <bullet 1>
+%   <bullet 2>
 %   %%% END_ROLE
 %
 % Skills block format (one block total):
@@ -20,7 +20,16 @@
 %   skill1, skill2, skill3
 %   %%% SKILLS_END
 
+
 %%% SECTION: Experience
+
+%%% ROLE_ID: ibm
+%%% COMPANY: International Business Machines (IBM)
+%%% TITLE: Incoming Software Developer Intern
+%%% DATES: Summer 2026
+%%% LOCATION: Durham, NC
+%%% SIZE: big
+
 
 %%% ROLE_ID: progroup_swe_intern
 %%% COMPANY: ProGroup
@@ -28,11 +37,15 @@
 %%% DATES: Dec. 2025 -- Present
 %%% LOCATION: Irvine, CA
 %%% SIZE: big
-\item Reduced costs 80\% by migrating a PowerApps tool to TypeScript, Node.js, MySQL, Redis, and AWS.
-\item Integrated Redis caching on key endpoints, cutting average request times by 25\% and reducing backend load.
-\item Achieved 83\% unit test coverage using Jest and Supertest to ensure high API reliability and stability.
-\item Deployed to AWS ECS via CI/CD pipelines and implemented notifications with AWS SQS and Lambda.
+Cut costs by 70\% by migrating an onboarding app from Microsoft Power Apps to MySQL, Node.js, and AWS.
+Designed an onboarding platform for 400+ HR professionals and new hires across multiple organizations.
+Automated email workflows and task monitoring for onboarding, saving 8 hours for each team member per week.
+Built a CI/CD pipeline to automate AWS deployments, reducing deployment times from 15 minutes to 2 minutes.
+Deployed and managed cloud infrastructure leveraging AWS EC2, Lambda, EventBridge, IAM, and SNS.
+Implemented Redis caching on high-traffic endpoints, reducing latency by 80\% and decreasing backend load.
+Conducted peer code reviews and incorporated customer feedback loops to iteratively improve product quality.
 %%% END_ROLE
+
 
 %%% ROLE_ID: uci_python_ta
 %%% COMPANY: University of California, Irvine
@@ -40,9 +53,9 @@
 %%% DATES: Jan. 2026 -- Present
 %%% LOCATION: Irvine, CA
 %%% SIZE: small
-\item Instructed 45 students on Python concepts including testing, generators, multithreading, and scripting.
-\item Resolved logic errors in OOP projects and multi-file architectures through systematic debugging sessions.
+Instructed 200 students on Python concepts including OOP, testing, generators, multithreading, and scripting.
 %%% END_ROLE
+
 
 %%% ROLE_ID: thai_oil_data_science_intern
 %%% COMPANY: Thai Oil
@@ -50,12 +63,15 @@
 %%% DATES: Jun. 2024 -- Sep. 2024
 %%% LOCATION: Bangkok, Thailand
 %%% SIZE: small
-\item Built a data pipeline processing 40GB+ of IoT sensor data from AWS S3 to SageMaker for ML training.
-\item Developed robust XGBoost classification models achieving 89\% accuracy in identifying pipe inefficiencies.
-\item Automated diagnostic workflows in Python, reducing inspection time by 60\% and increasing productivity.
+Built an RNN classifying 7 pipe failure types from 43 GB of sensor time-series data, achieving 89\% accuracy.
+Designed ETL pipelines to ingest, normalize, and standardize raw sensor data across refinery data sources.
+Deployed model to AWS SageMaker and S3 for scalable cloud inference, eliminating manual diagnostic workflows.
+Reduced maintenance costs by 15\% through the automation of pipe fault diagnostic across operations.
 %%% END_ROLE
 
+
 %%% SECTION: Projects
+
 
 %%% ROLE_ID: squadwork
 %%% COMPANY: Squadwork
@@ -63,11 +79,15 @@
 %%% DATES: Jun. 2025 -- Present
 %%% LOCATION:
 %%% SIZE: big
-\item Integrated a Redis caching layer, reducing API response times by 85\% and decreasing database load.
-\item Automated CI/CD pipelines on AWS ECS, cutting deployment time by 80\% (15 minutes to 3 minutes).
-\item Built real-time team chat using WebSockets with Redis-backed message persistence and delivery.
-\item Architected RESTful APIs with JWT-based authentication, implementing rotating refresh and access token cycles for secure, stateless session management.
+Implemented real-time WebSocket chat with PostgreSQL persistence and Redis caching for recent message logs.
+Layered Redis caching on session tokens and task queries, cutting average API latency by 75% on vital endpoints.
+Dispatched chat and task notifications through AWS SES and SMS for users with linked phone numbers.
+Tested the full stack by simulated 32,000 mixed-use RPS, validating stability under peak concurrent traffic.
+Automated CI/CD pipelines on EC2, cutting deployment times, then migrated to EKS for orchestration.
+Built a full-stack team manager with shared and nested tasks, real-time chat, and an AI brainstorming agent.
+Architected RESTful APIs with JWT auth using rotating access/refresh tokens for stateless session management.
 %%% END_ROLE
+
 
 %%% ROLE_ID: fabflix
 %%% COMPANY: Fabflix
@@ -75,11 +95,14 @@
 %%% DATES: Jan. 2026 -- Mar. 2026
 %%% LOCATION:
 %%% SIZE: big
-\item Implemented MySQL master-slave replication and load balancing across a cluster of Tomcat instances.
-\item Deployed microservices in Docker containers on a Kubernetes cluster (AWS EKS) running on AWS EC2.
-\item Built an autocomplete search feature with cached query responses using MySQL User Defined Functions.
-\item Designed a relational MySQL database schema modeling complex relationships between movies, stars, genres, and user data, with all interactions secured via PreparedStatements to prevent SQL injection.
+Served 65,000+ movies with sub-150ms responses using MySQL replication, connection pooling, and caching.
+Deployed Dockerized microservices on AWS EKS with autoscaling, health checks, and zero-downtime rollouts.
+Implemented substring, fuzzy, and full-text search over normalized MySQL tables for movies, stars, and genres.
+Configured MySQL master-slave replication and load balancing to distribute reads and ensure write consistency.
+Built autocomplete search with MySQL UDFs and Redis caching to reduce redundant database queries.
+Orchestrated microservices on Kubernetes/EKS for independent scaling, fault isolation, and rolling deployments.
 %%% END_ROLE
+
 
 %%% ROLE_ID: ai_native_doc_editor
 %%% COMPANY: AI Native Document Editor
@@ -87,10 +110,56 @@
 %%% DATES: Oct. 2025 -- Dec. 2025
 %%% LOCATION:
 %%% SIZE: small
-\item Built a text-editor with live collaboration using WebSockets, enabling users to edit documents simultaneously.
-\item Integrated AI-powered autocompletion by streaming user input to OpenAI API with debounced requests to optimize API usage and reduce latency.
-\item Designed a user access and permissions system to manage read/write permissions for multiple users.
+Built a real-time collaborative text editor with WebSockets, enabling multiple users to edit docs simultaneously.
+Streamed OpenAI API requests with debounced input handling for text completion, optimizing API calls.
+Designed granular read/write permissions, allowing users to selectively share documents with collaborators.
+Implemented OAuth 2.0 for secure third-party authentication and session management.
 %%% END_ROLE
+
+
+%%% ROLE_ID: search_engine
+%%% COMPANY: Search Engine
+%%% TITLE: TypeScript, Node.js, OpenAI API, WebSockets, PostgreSQL
+%%% DATES: Oct. 2025 -- Dec. 2025
+%%% LOCATION:
+%%% SIZE: small
+Built a scalable Python web-crawling pipeline ingesting 60,000+ documents from JSON and HTML archives.
+Designed tokenization with lowercasing, non-alphanumeric splitting, stop-word filtering, and stemming.
+Developed weighted TF scoring with field weights for body, title, and headings, normalized by document length.
+Compressed inverted index posts with variable-byte encoding for doc-ID deltas on a 60,000+ document corpus.
+Built a PageRank pipeline using 50-iteration power iteration with 0.85 damping over a 60,000+ node URL graph.
+Engineered an LRU-cached postings reader with varbyte decoding and vocab-offset seeks for low-latency queries.
+%%% END_ROLE
+
+
+
+
+%%% ROLE_ID: c_shell
+%%% COMPANY: Shell in C
+%%% TITLE: TypeScript, Node.js, OpenAI API, WebSockets, PostgreSQL
+%%% DATES: Oct. 2025 -- Dec. 2025
+%%% LOCATION:
+%%% SIZE: small
+Built an interactive Unix-style shell in C supporting core filesystem commands such as cd, pwd, and mkdir.
+Implemented parsing and input handling to process terminal commands through a continuous execution loop.
+Developed path resolution logic for relative paths, parent-directory navigation, and working directory updates.
+Added error handling for bad commands, missing arguments, and nonexistent directories to improve reliability.
+Used POSIX filesystem calls to create directories, change working directories, and retrieve path information.
+%%% END_ROLE
+
+
+%%% ROLE_ID: wildfire_watch
+%%% COMPANY: Wildfire Watch
+%%% TITLE: TypeScript, Node.js, OpenAI API, WebSockets, PostgreSQL
+%%% DATES: Oct. 2025 -- Dec. 2025
+%%% LOCATION:
+%%% SIZE: small
+Built a serverless fire safety app with AWS Lambda, Kinesis, DynamoDB, EventBridge, CloudFormation, and SNS.
+Created Lambda functions to ingest wildfire, weather, and satellite data from NOAA, NASA, and CAL FIRE.
+Automated recurring data ingestion with EventBridge scheduled triggers to keep prediction inputs updated.
+Provisioned serverless AWS resources with CloudFormation templates to improve deployment consistency.
+%%% END_ROLE
+
 
 %%% SKILLS_START
 %%% ROW: Languages
@@ -104,3 +173,6 @@ AWS (ECS, EKS, EC2, Lambda, S3), GCP, Docker, Kubernetes, CI/CD, GitHub Actions,
 %%% ROW: Testing \& Tools
 Jest, Supertest, OAuth 2.0, JWT
 %%% SKILLS_END
+
+
+

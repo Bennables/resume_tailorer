@@ -100,8 +100,13 @@ def parse_bullets(path: Path) -> Bank:
                     current[key] = value
                     matched = True
                     break
-            if not matched and current is not None and stripped.startswith(r"\item"):
-                bullets.append(stripped[len(r"\item"):].strip())
+            if not matched and current is not None:
+                if stripped.startswith(r"\resumeItem{") and stripped.endswith("}"):
+                    bullets.append(stripped[len(r"\resumeItem{"):-1].strip())
+                elif stripped.startswith(r"\item"):
+                    bullets.append(stripped[len(r"\item"):].strip())
+                elif stripped and not stripped.startswith("%"):
+                    bullets.append(stripped)
 
         i += 1
 

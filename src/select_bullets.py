@@ -17,36 +17,39 @@ class Selection:
     skills_per_row: dict[str, list[int]]
 
 _INSTRUCTIONS = (
-    "You tailor resumes to a job description. You are given a BANK of resume "
-    "content and a JOB DESCRIPTION. Return JSON choosing which bullets and "
-    "skills to highlight.\n\n"
-    "Primary goal: pick the bullets and skills that best demonstrate the "
-    "candidate is a strong fit for THIS specific role — the work the JD "
-    "actually describes, the problems it asks the candidate to solve, and "
-    "the seniority level implied.\n\n"
-    "Keyword overlap with the JD is a strong secondary signal because:\n"
-    "(a) ATS (Applicant Tracking System) filters rank resumes partly by exact "
-    "keyword and phrase overlap, so JD terminology in the selected bullets "
-    "helps the resume get past automated screens, and\n"
-    "(b) shared terminology usually indicates genuine topical fit.\n\n"
-    "Use keyword overlap as a tiebreaker and a coverage check, not as the "
-    "objective itself. A bullet about genuinely relevant work beats a bullet "
-    "that just happens to share words with the JD. Where several bullets are "
-    "similarly relevant, prefer the one that uses the JD's exact terminology, "
-    "and try to cover distinct JD keywords across the selected bullets rather "
-    "than hitting the same keyword repeatedly.\n\n"
-    "Hard rules:\n"
-    "- Never invent or rewrite content. Only reference existing items by index.\n"
-    "- For each role, pick up to max_bullets bullets. Order indices in the order "
-    "they should appear on the resume, strongest fit first.\n"
-    "- For each skill row, return indices of skills the JD actually names or "
-    "clearly implies, ordered by relevance. These get moved to the "
-    "front of the row. Do not mark skills just because they are generally "
-    "impressive.\n\n"
-    "Output ONLY JSON with this exact shape and nothing else:\n"
+    "You tailor resumes to job descriptions. Given a BANK of resume content "
+    "and a JOB DESCRIPTION, return JSON selecting which bullets and skills to "
+    "highlight.\n\n"
+    "PRIMARY GOAL: Select bullets and skills that best demonstrate fit for the "
+    "specific role — its actual work, problems to solve, and implied seniority.\n\n"
+    "KEYWORD OVERLAP is a strong secondary signal: ATS filters rank resumes by "
+    "exact keyword/phrase match, and shared terminology signals topical fit. "
+    "Use it as a tiebreaker and coverage check, not the objective. Genuine "
+    "relevance beats surface word overlap. Among similarly relevant bullets, "
+    "prefer JD terminology and cover distinct JD keywords rather than repeating "
+    "the same ones. Prefer bullets with concrete metrics (numbers, scale, "
+    "latency, cost, revenue, accuracy, throughput, time saved, user/customer "
+    "impact) when relevant to the JD.\n\n"
+    "HARD RULES:\n"
+    "1. Never invent or rewrite content — reference existing items by index only.\n"
+    "2. Evaluate roles/projects as whole entries. Include a role only when the "
+    "overall entry is among the strongest matches, not just because one bullet "
+    "overlaps.\n"
+    "3. Include ALL \"Experience\" roles in bullets_per_role. Never omit any.\n"
+    "4. Include at most 3 \"Projects\" roles. If more than 3 qualify, keep the "
+    "3 strongest and omit the rest.\n"
+    "5. Per included role: choose ≥3 bullets (or all if fewer than 3 exist). "
+    "Older Experience roles may use 2 bullets if their top 2 already capture "
+    "the strongest relevant evidence. Never exceed the role's max_bullets from "
+    "the BANK. Order strongest fit first; break ties by quantified outcomes.\n"
+    "6. Per skill row: return indices of skills the JD names or clearly implies, "
+    "ordered by relevance. Do not select skills merely because they are "
+    "generally impressive.\n\n"
+    "Output ONLY valid JSON:\n"
     '{"bullets_per_role": {"<role_id>": [<bullet_idx>, ...]}, '
     '"skills_per_row": {"<row_name>": [<skill_idx>, ...]}}'
 )
+
 
 _MODEL = "gemini-2.5-flash"
 
@@ -56,6 +59,9 @@ def _build_bank_payload(bank: Bank) -> str:
         "roles": [
             {
                 "role_id": r.role_id,
+                "section": r.section,
+                "company": r.company,
+                "title": r.title,
                 "max_bullets": r.max_bullets,
                 "bullets": [{"idx": i, "text": b} for i, b in enumerate(r.bullets)],
             }
@@ -83,6 +89,17 @@ def _parse_response(text: str) -> Selection:
     )
 
 
+def _cap_selected_projects(selection: Selection, bank: Bank, max_projects: int = 3) -> None:
+    sections_by_role = {role.role_id: role.section for role in bank.roles}
+    selected_projects = [
+        role_id
+        for role_id, bullets in selection.bullets_per_role.items()
+        if bullets and sections_by_role.get(role_id) == "Projects"
+    ]
+    for role_id in selected_projects[max_projects:]:
+        selection.bullets_per_role.pop(role_id, None)
+
+
 def select_bullets(bank: Bank, job_description: str) -> Selection:
     client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
     system_instruction = f"{_INSTRUCTIONS}\n\n{_build_bank_payload(bank)}"
@@ -95,4 +112,6 @@ def select_bullets(bank: Bank, job_description: str) -> Selection:
             temperature=0.0,
         ),
     )
-    return _parse_response(response.text)
+    selection = _parse_response(response.text)
+    _cap_selected_projects(selection, bank)
+    return selection

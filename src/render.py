@@ -7,14 +7,20 @@ from .select_bullets import Selection
 
 
 def _render_role(role: Role, chosen_indices: list[int]) -> str:
-    lines = [
-        f"\\textbf{{{role.title}}} \\hfill {role.dates} \\\\",
-        f"\\textit{{{role.company}}} \\hfill {role.location}",
-        "\\begin{itemize}",
-    ]
+    if role.section == "Projects":
+        header = f"\\textbf{{{role.company}}} $|$ \\textit{{{role.title}}} \\hfill {role.dates}"
+        lines = [header, "\\begin{itemize}"]
+    else:
+        lines = [
+            f"\\textbf{{{role.title}}} \\hfill {role.dates} \\\\",
+            f"\\textit{{{role.company}}} \\hfill {role.location}",
+            "\\begin{itemize}",
+        ]
     for idx in chosen_indices:
         if 0 <= idx < len(role.bullets):
-            lines.append(f"  \\item {role.bullets[idx]}")
+            lines.append(
+                f"  \\item\\small{{\n    {{{role.bullets[idx]} \\vspace{{-2pt}}}}\n  }}"
+            )
     lines.append("\\end{itemize}")
     return "\n".join(lines)
 
@@ -26,7 +32,7 @@ def _render_sections(bank: Bank, selection: Selection) -> str:
         chosen = selection.bullets_per_role.get(role.role_id, [])
         if not chosen:
             continue
-        block = _render_role(role, chosen[: role.max_bullets])
+        block = _render_role(role, chosen)
         if role.section not in by_section:
             by_section[role.section] = []
             section_order.append(role.section)
@@ -68,7 +74,7 @@ def render_resume(template: str, bank: Bank, selection: Selection) -> str:
         for role in bank.roles:
             if role.role_id == role_id:
                 chosen = selection.bullets_per_role.get(role_id, [])
-                return _render_role(role, chosen[: role.max_bullets])
+                return _render_role(role, chosen)
         return match.group(0)
 
     result = re.sub(r"<<ROLE:([^>]+)>>", _one_role, result)
