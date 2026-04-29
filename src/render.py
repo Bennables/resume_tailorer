@@ -20,7 +20,7 @@ def _render_role(role: Role, chosen_indices: list[int]) -> str:
         lines.append("\\begin{itemize}")
         for idx in valid:
             lines.append(
-                f"  \\item\\small{{\n    {{{role.bullets[idx]}}}\n  }}"
+                f"  \\resumeItem{{{role.bullets[idx]}}}"
             )
         lines.append("\\end{itemize}")
     return "\n".join(lines)
