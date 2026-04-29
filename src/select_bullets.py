@@ -44,14 +44,19 @@ _INSTRUCTIONS = (
     "the BANK. Order strongest fit first; break ties by quantified outcomes.\n"
     "6. Per skill row: return indices of skills the JD names or clearly implies, "
     "ordered by relevance. Do not select skills merely because they are "
-    "generally impressive.\n\n"
+    "generally impressive.\n"
+    "7. Avoid excessive repetition: do not select bullets/skill rows that cause "
+    "the same skill, technology, or keyword to appear more than 2 times across "
+    "the whole resume, unless the JD makes that skill central to the role. When "
+    "repetition is unavoidable, prefer the strongest concrete evidence with "
+    "metrics and drop weaker duplicate mentions.\n\n"
     "Output ONLY valid JSON:\n"
     '{"bullets_per_role": {"<role_id>": [<bullet_idx>, ...]}, '
     '"skills_per_row": {"<row_name>": [<skill_idx>, ...]}}'
 )
 
 
-_MODEL = "gemini-2.5-flash"
+_MODEL = "gemini-3.1-pro-preview"
 
 
 def _build_bank_payload(bank: Bank) -> str:

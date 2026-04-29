@@ -1,4 +1,3 @@
-keep all the experiences, only select the right bullet points
-
-Would probably be worth to split experiences and projects into two different prompts
-dd
+put relevant first, but then metrics,
+and then make sure that the experiences don't overlap too much
+make sure the dates are correct
