@@ -20,31 +20,30 @@ _INSTRUCTIONS = (
     "You tailor resumes to job descriptions. Given a BANK of resume content "
     "and a JOB DESCRIPTION, return JSON selecting which bullets and skills to "
     "highlight.\n\n"
-    "PRIMARY GOAL: Select bullets and skills that best demonstrate fit for the "
-    "specific role — its actual work, problems to solve, and implied seniority.\n\n"
-    "KEYWORD OVERLAP is a strong secondary signal: ATS filters rank resumes by "
-    "exact keyword/phrase match, and shared terminology signals topical fit. "
-    "Use it as a tiebreaker and coverage check, not the objective. Genuine "
-    "relevance beats surface word overlap. Among similarly relevant bullets, "
-    "prefer JD terminology and cover distinct JD keywords rather than repeating "
-    "the same ones. Prefer bullets with concrete metrics (numbers, scale, "
-    "latency, cost, revenue, accuracy, throughput, time saved, user/customer "
-    "impact) when relevant to the JD.\n\n"
+    "BULLET PRIORITY ORDER (rank bullets by this, highest first):\n"
+    "1. Keyword overlap with the JD AND concrete metrics (numbers, scale, latency, "
+    "cost, revenue, accuracy, throughput, time saved, user/customer impact).\n"
+    "2. Strong fit for the role — its actual work, problems to solve, and implied "
+    "seniority — without necessarily overlapping on keywords.\n"
+    "3. Concrete metrics alone, even without keyword overlap.\n"
+    "ATS filters rank resumes by exact keyword/phrase match. Cover distinct JD "
+    "keywords rather than repeating the same ones.\n\n"
     "HARD RULES:\n"
     "1. Never invent or rewrite content — reference existing items by index only.\n"
     "2. Evaluate roles/projects as whole entries. Include a role only when the "
     "overall entry is among the strongest matches, not just because one bullet "
     "overlaps.\n"
     "3. Include ALL \"Experience\" roles in bullets_per_role. Never omit any.\n"
-    "4. Include at most 3 \"Projects\" roles. If more than 3 qualify, keep the "
-    "3 strongest and omit the rest.\n"
+    "4. Include at most 4 \"Projects\" roles; 3 is typical. If more than 4 qualify, "
+    "keep the 4 strongest and omit the rest. Order included projects by relevance "
+    "to the JD, most relevant first; break ties by number of bullets, more first. "
+    "Hackathon projects must never appear first in the projects list.\n"
     "5. Per included role: choose ≥3 bullets (or all if fewer than 3 exist). "
     "Older Experience roles may use 2 bullets if their top 2 already capture "
     "the strongest relevant evidence. Never exceed the role's max_bullets from "
     "the BANK. Order strongest fit first; break ties by quantified outcomes.\n"
     "6. Per skill row: return indices of skills the JD names or clearly implies, "
-    "ordered by relevance. Do not select skills merely because they are "
-    "generally impressive.\n"
+    "ordered by relevance. \n"
     "7. Avoid excessive repetition: do not select bullets/skill rows that cause "
     "the same skill, technology, or keyword to appear more than 2 times across "
     "the whole resume, unless the JD makes that skill central to the role. When "
@@ -94,7 +93,7 @@ def _parse_response(text: str) -> Selection:
     )
 
 
-def _cap_selected_projects(selection: Selection, bank: Bank, max_projects: int = 3) -> None:
+def _cap_selected_projects(selection: Selection, bank: Bank, max_projects: int = 4) -> None:
     sections_by_role = {role.role_id: role.section for role in bank.roles}
     selected_projects = [
         role_id

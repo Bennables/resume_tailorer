@@ -23,6 +23,7 @@ def _render_role(role: Role, chosen_indices: list[int]) -> str:
                 f"  \\resumeItem{{{role.bullets[idx]}}}"
             )
         lines.append("\\end{itemize}")
+    lines.append("\\vspace{2pt }")
     return "\n".join(lines)
 
 
@@ -52,7 +53,7 @@ def _render_skill_row(row: SkillRow, highlighted: list[int]) -> str:
     for idx in highlighted:
         if 0 <= idx < len(row.skills) and idx not in seen:
             seen.add(idx)
-            ordered.append(f"\\textbf{{{row.skills[idx]}}}")
+            ordered.append(row.skills[idx])
     for i, skill in enumerate(row.skills):
         if i not in seen:
             ordered.append(skill)
