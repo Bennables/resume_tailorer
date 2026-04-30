@@ -1,6 +1,7 @@
 """Tiny Flask UI: paste a JD, pick a folder name, get the PDF back."""
 
 import re
+from pathlib import Path
 from flask import Flask, abort, request, send_file
 
 from .tailor import run_tailor
@@ -14,16 +15,33 @@ FORM_HTML = """
 <html>
 <head>
   <title>Resume Tailorer</title>
+  <link rel="icon" type="image/png" href="/dorp.png" />
   <style>
-    body { font-family: system-ui, sans-serif; max-width: 720px; margin: 2rem auto; padding: 0 1rem; }
+    body { font-family: system-ui, sans-serif; max-width: 720px; margin: 2rem auto; padding: 0 1rem; position: relative; }
     label { display: block; margin-top: 1rem; font-weight: 600; }
     input[type=text] { width: 100%; padding: 0.5rem; font-size: 1rem; }
     textarea { width: 100%; min-height: 300px; padding: 0.5rem; font-size: 0.95rem; font-family: inherit; }
     button { margin-top: 1rem; padding: 0.6rem 1.2rem; font-size: 1rem; cursor: pointer; }
+    .jay { position: fixed; pointer-events: none; opacity: 0.18; z-index: -1; }
   </style>
 </head>
 <body>
   <h1>Resume Tailorer</h1>
+  <script>
+    const COUNT = 70;
+    for (let i = 0; i < COUNT; i++) {
+      const img = document.createElement('img');
+      img.src = '/dorp.png';
+      img.className = 'jay';
+      const size = 80 + Math.random() * 160;
+      img.style.width = size + 'px';
+      img.style.left = (Math.random() * 100) + 'vw';
+      img.style.top = (Math.random() * 100) + 'vh';
+      img.style.transform = 'rotate(' + (Math.random() * 360) + 'deg)';
+      img.style.opacity = (0.08 + Math.random() * .8).toFixed(2);
+      document.body.appendChild(img);
+    }
+  </script>
   <form id="tailor-form" method="post" action="/tailor">
     <label>Folder name</label>
     <input type="text" name="folder" required placeholder="acme_backend" />
@@ -71,6 +89,16 @@ FORM_HTML = """
 </body>
 </html>
 """
+
+
+@app.get("/jaydurbss.png")
+def jaydurbss():
+    return send_file(Path(__file__).parent / "JAYDURBSS.png", mimetype="image/png")
+
+
+@app.get("/dorp.png")
+def dorp():
+    return send_file(Path(__file__).parent / "DORP.png", mimetype="image/png")
 
 
 @app.get("/")
