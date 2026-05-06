@@ -19,8 +19,8 @@ FORM_HTML = """
   <style>
     body { font-family: system-ui, sans-serif; max-width: 720px; margin: 2rem auto; padding: 0 1rem; position: relative; }
     label { display: block; margin-top: 1rem; font-weight: 600; }
-    input[type=text] { width: 100%; padding: 0.5rem; font-size: 1rem; }
-    textarea { width: 100%; min-height: 300px; padding: 0.5rem; font-size: 0.95rem; font-family: inherit; }
+    input[type=text] { width: 100%; padding: 0.5rem; font-size: 1rem; border-radius: 30px; border: 1px solid #ccc; box-sizing: border-box; }
+    textarea { width: 100%; min-height: 200px; padding: 0.5rem; font-size: 0.85rem; font-family: inherit; border-radius: 20px; border: 1px solid #ccc; box-sizing: border-box; }
     button { margin-top: 1rem; padding: 0.6rem 1.2rem; font-size: 1rem; cursor: pointer; }
     .jay { position: fixed; pointer-events: none; opacity: 0.18; z-index: -1; }
   </style>
@@ -31,14 +31,14 @@ FORM_HTML = """
     const COUNT = 70;
     for (let i = 0; i < COUNT; i++) {
       const img = document.createElement('img');
-      img.src = '/dorp.png';
+      img.src = '';
       img.className = 'jay';
       const size = 80 + Math.random() * 160;
       img.style.width = size + 'px';
       img.style.left = (Math.random() * 100) + 'vw';
       img.style.top = (Math.random() * 100) + 'vh';
       img.style.transform = 'rotate(' + (Math.random() * 360) + 'deg)';
-      img.style.opacity = (0.08 + Math.random() * .8).toFixed(2);
+      img.style.opacity = (0.08 + Math.random() * .1).toFixed(2);
       document.body.appendChild(img);
     }
   </script>
